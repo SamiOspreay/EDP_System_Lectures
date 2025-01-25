@@ -52,3 +52,30 @@ class Pharmacy:
 
     def dispense_medication(self, event):
         print(f"Pharmacy: Dispensing {event.data['medication']} for {event.data['name']}.")
+
+
+class Reception:
+    def __init__(self, event_manager):
+        self.event_manager = event_manager
+        event_manager.register_listener("patient_check_in", self.register_patient)
+
+    def register_patient(self, event):
+        print(f"Reception: Registering patient {event.data['name']}.")
+
+def main():
+    event_manager = EventManager()
+
+    
+    patient1 = Patient("Patrycja", event_manager)
+    patient2 = Patient("Tomek", event_manager)
+    doctor = Doctor(event_manager)
+    pharmacy = Pharmacy(event_manager)
+    reception = Reception(event_manager)
+
+    
+    patient1.check_in()
+    patient2.check_in()
+    patient1.request_medication("Apap")
+    patient2.request_medication("Ibuprom")
+
+main()
