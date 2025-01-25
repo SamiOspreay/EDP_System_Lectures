@@ -32,3 +32,23 @@ class Patient:
         print(f"{self.name} is requesting medication: {medication}.")
         event = Event("medication_request", {"name": self.name, "medication": medication})
         self.event_manager.dispatch(event)
+
+class Doctor:
+    def __init__(self, event_manager):
+        self.event_manager = event_manager
+        event_manager.register_listener("patient_check_in", self.attend_patient)
+        event_manager.register_listener("medication_request", self.approve_medication)
+
+    def attend_patient(self, event):
+        print(f"Doctor: Attending to patient {event.data['name']}.")
+
+    def approve_medication(self, event):
+        print(f"Doctor: Approving medication {event.data['medication']} for {event.data['name']}.")
+
+class Pharmacy:
+    def __init__(self, event_manager):
+        self.event_manager = event_manager
+        event_manager.register_listener("medication_request", self.dispense_medication)
+
+    def dispense_medication(self, event):
+        print(f"Pharmacy: Dispensing {event.data['medication']} for {event.data['name']}.")
