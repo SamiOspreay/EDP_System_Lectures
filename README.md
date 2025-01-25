@@ -3,11 +3,11 @@
 
 Here’s a more unique version of the provided description:
 
-Event-Driven Hospital Workflow System
+Event-Driven Hospital Workflow System:
 
 -This system is built around an event-driven architecture to simulate a hospital's workflow, using the observer design pattern. It facilitates seamless communication between various entities such as patients, doctors, pharmacies, and receptionists, triggered by events.
 
-Key Components
+Key Components:
 
 -The system consists of the following essential parts:
 
